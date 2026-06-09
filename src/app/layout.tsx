@@ -18,10 +18,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${siteConfig.brandName} - Portfolio`,
-  description: siteConfig.hero.subtitle,
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://matheuskris.dev",
+  ),
+  title: `${siteConfig.brandName} — Software Engineer`,
+  description: siteConfig.tagline,
   icons: {
     icon: "/favicon.ico",
+  },
+  openGraph: {
+    title: `${siteConfig.brandName} — Software Engineer`,
+    description: siteConfig.tagline,
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.brandName} — Software Engineer`,
+    description: siteConfig.tagline,
   },
 };
 
