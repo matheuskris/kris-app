@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { siteConfig } from "@/lib/content/site";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 function MaterialIcon({ name }: { name: string }) {
   return (
@@ -27,13 +30,15 @@ export function Hero() {
       </p>
 
       <div className="reveal-item delay-200 flex gap-md">
-        <Link
-          href={hero.primaryCta.href}
-          className="primary-btn flex items-center gap-2 rounded-full px-6 py-3 text-label-md text-white active:scale-95"
-        >
-          {hero.primaryCta.label}
-          <MaterialIcon name="arrow_forward" />
-        </Link>
+        <Magnetic>
+          <Link
+            href={hero.primaryCta.href}
+            className="primary-btn flex items-center gap-2 rounded-full px-6 py-3 text-label-md text-white active:scale-95"
+          >
+            {hero.primaryCta.label}
+            <MaterialIcon name="arrow_forward" />
+          </Link>
+        </Magnetic>
 
         <Link
           href={hero.secondaryCta.href}
