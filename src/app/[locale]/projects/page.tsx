@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
-import { CaseStudy } from "@/components/projects/CaseStudy";
+import { ProjectsIndex } from "@/components/projects/ProjectsIndex";
 import { isLocale } from "@/lib/i18n/locales";
-import { getAllProjects } from "@/lib/content/projects";
+import { getIndexProjects } from "@/lib/content/projects";
 import { getSiteConfig } from "@/lib/content/site";
 
 export default async function ProjectsPage({
@@ -12,7 +12,7 @@ export default async function ProjectsPage({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const projects = getAllProjects(locale);
+  const projects = getIndexProjects(locale);
   const { pages } = getSiteConfig(locale);
 
   return (
@@ -25,10 +25,8 @@ export default async function ProjectsPage({
           {pages.projects.subtitle}
         </p>
       </section>
-      <section className="page-shell flex flex-col gap-8 pb-20">
-        {projects.map((project) => (
-          <CaseStudy key={project.slug} project={project} locale={locale} anchor />
-        ))}
+      <section className="page-shell pb-20">
+        <ProjectsIndex projects={projects} locale={locale} />
       </section>
     </main>
   );

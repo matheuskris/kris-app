@@ -98,7 +98,10 @@ export function Header({ locale }: { locale: Locale }) {
   );
   const activeSection = useActiveSection(sectionIds);
   const [open, setOpen] = useState(false);
-  const current = localeFromPathname(usePathname()) ?? locale;
+  const pathname = usePathname();
+  const current = localeFromPathname(pathname) ?? locale;
+  const projectsHref = localizeHref(current, "/projects");
+  const onProjects = pathname === projectsHref;
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-outline-variant/25 bg-canvas/80 backdrop-blur-xl">
@@ -131,6 +134,17 @@ export function Header({ locale }: { locale: Locale }) {
               </Link>
             );
           })}
+          <Link
+            href={projectsHref}
+            aria-current={onProjects ? "page" : undefined}
+            className={`text-label-md py-1 transition-colors ${
+              onProjects
+                ? "text-on-surface"
+                : "text-on-surface-variant hover:text-on-surface"
+            }`}
+          >
+            {site.chrome.projectsIndex}
+          </Link>
         </nav>
 
         <div className="flex items-center gap-3">

@@ -23,13 +23,13 @@ export const siteConfigPt: SiteConfig = {
   hero: {
     subtitle:
       "Trabalho em sistemas full-stack para fluxos de negócio reais. Remoto, a partir do Brasil.",
-    primaryCta: { label: "Ver o trabalho", href: "#projects" },
+    primaryCta: { label: "Ver todos os projetos", href: "/projects" },
     secondaryCta: { label: "Dizer olá", href: "#contact" },
   },
   work: {
     title: "Trabalho",
     subtitle:
-      "Faturamento, mapas, movimentação de dinheiro e um produto de saúde. Os resultados ficam em cada caso.",
+      "Faturamento, mapas, movimentação de dinheiro, saúde, fundo fixo e folha de ponto. Os resultados ficam em cada caso.",
   },
   impact: {
     index: "// 02. Resultados mensuráveis",
@@ -142,7 +142,7 @@ export const siteConfigPt: SiteConfig = {
       { label: "GitHub", href: links.github },
       { label: "LinkedIn", href: links.linkedin },
       { label: "E-mail", href: links.email },
-      { label: "Projetos", href: "/projects" },
+      { label: "Todos os projetos", href: "/projects" },
       { label: "Blog", href: "/blog" },
     ] satisfies FooterLink[],
   },
@@ -152,7 +152,8 @@ export const siteConfigPt: SiteConfig = {
     getInTouch: "Dizer olá",
     menu: "Menu",
     close: "Fechar",
-    projectsIndex: "Todo o trabalho",
+    projectsIndex: "Todos os projetos",
+    seeAllProjects: "Ver todos os projetos",
     blog: "Notas",
     language: "Idioma",
     competenciesHeading: "Com o que eu trabalho",
@@ -171,13 +172,26 @@ export const siteConfigPt: SiteConfig = {
     sendMessage: "Enviar mensagem",
     engineeringChallenge: "O problema",
     impactOutcome: "O que saiu",
+    theIdea: "A ideia",
+    backToProjects: "Todo o trabalho",
     allNotes: "Todas as notas",
   },
-  pages: {
+    pages: {
     projects: {
       title: "Trabalho",
       subtitle:
-        "Faturamento, mapas, movimentação de dinheiro e um produto de saúde — os mesmos casos da home.",
+        "Sistemas em tempo integral, contratos paralelos e trabalho pessoal. Filtre por tipo ou stack.",
+      kindLabel: "Tipo de trabalho",
+      tagsLabel: "Stack",
+      kinds: {
+        all: "Todos",
+        "full-time": "Tempo integral",
+        contract: "Contrato",
+        personal: "Pessoal",
+      },
+      shown: "{count} visíveis",
+      empty:
+        "Nada neste recorte. Limpe um filtro para ver mais trabalho.",
     },
     blog: {
       title: "Notas",

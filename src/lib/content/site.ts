@@ -48,13 +48,13 @@ export const siteConfig = {
   hero: {
     subtitle:
       "I work on full-stack systems for real business workflows. Remote, based in Brazil.",
-    primaryCta: { label: "See the work", href: "#projects" },
+    primaryCta: { label: "See all projects", href: "/projects" },
     secondaryCta: { label: "Say hello", href: "#contact" },
   },
   work: {
     title: "Work",
     subtitle:
-      "Billing, maps, money movement, and a healthcare product. The outcomes sit with each case.",
+      "Billing, maps, money movement, healthcare, petty cash, and timesheets. The outcomes sit with each case.",
   },
   impact: {
     index: "// 02. Measurable outcomes",
@@ -167,7 +167,7 @@ export const siteConfig = {
       { label: "GitHub", href: links.github },
       { label: "LinkedIn", href: links.linkedin },
       { label: "Email", href: links.email },
-      { label: "Projects", href: "/projects" },
+      { label: "All projects", href: "/projects" },
       { label: "Blog", href: "/blog" },
     ] satisfies FooterLink[],
   },
@@ -177,7 +177,8 @@ export const siteConfig = {
     getInTouch: "Say hello",
     menu: "Menu",
     close: "Close",
-    projectsIndex: "All work",
+    projectsIndex: "All projects",
+    seeAllProjects: "See all projects",
     blog: "Notes",
     language: "Language",
     competenciesHeading: "What I work with",
@@ -196,13 +197,26 @@ export const siteConfig = {
     sendMessage: "Send message",
     engineeringChallenge: "The problem",
     impactOutcome: "What shipped",
+    theIdea: "The idea",
+    backToProjects: "All work",
     allNotes: "All notes",
   },
-  pages: {
+    pages: {
     projects: {
       title: "Work",
       subtitle:
-        "Billing, maps, money movement, and a healthcare product — the same cases as the home page.",
+        "Full-time systems, side contracts, and personal work. Filter by kind or stack.",
+      kindLabel: "Kind of work",
+      tagsLabel: "Stack",
+      kinds: {
+        all: "All",
+        "full-time": "Full-time",
+        contract: "Contract",
+        personal: "Personal",
+      },
+      shown: "{count} shown",
+      empty:
+        "Nothing in this slice. Clear a filter to see more work.",
     },
     blog: {
       title: "Notes",

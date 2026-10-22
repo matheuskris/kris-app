@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/lib/i18n/locales";
+import { localizeHref } from "@/lib/i18n/paths";
 import { getSiteConfig } from "@/lib/content/site";
 
 export function Hero({ locale }: { locale: Locale }) {
@@ -24,13 +25,13 @@ export function Hero({ locale }: { locale: Locale }) {
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <Link
-              href={hero.primaryCta.href}
+              href={localizeHref(locale, hero.primaryCta.href)}
               className="btn-primary text-label-md inline-flex items-center gap-2 px-5 py-2.5"
             >
               {hero.primaryCta.label}
             </Link>
             <Link
-              href={hero.secondaryCta.href}
+              href={localizeHref(locale, hero.secondaryCta.href)}
               className="btn-secondary text-label-md inline-flex items-center gap-2 px-5 py-2.5 text-on-surface"
             >
               {hero.secondaryCta.label}

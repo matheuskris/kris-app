@@ -48,7 +48,7 @@ export function CaseStudy({
         </div>
         {!anchor && (
           <Link
-            href={`${localizeHref(locale, "/projects")}#${project.slug}`}
+            href={localizeHref(locale, `/projects/${project.slug}`)}
             className="text-label-md mt-1 inline-flex items-center gap-1.5 text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary"
           >
             {project.linkLabel}
