@@ -1,3 +1,9 @@
+import type { Locale } from "@/lib/i18n/locales";
+import {
+  earlyCareerNotePt,
+  experiencesPt,
+} from "@/lib/content/experience.pt";
+
 export type ExperienceEntry = {
   id: string;
   company: string;
@@ -79,10 +85,20 @@ const earlyCareerNote: EarlyCareerNote = {
   description: "Built single-page applications on demand.",
 };
 
-export function getExperiences(): ExperienceEntry[] {
-  return experiences;
+const experiencesByLocale: Record<Locale, ExperienceEntry[]> = {
+  en: experiences,
+  pt: experiencesPt,
+};
+
+const earlyCareerByLocale: Record<Locale, EarlyCareerNote> = {
+  en: earlyCareerNote,
+  pt: earlyCareerNotePt,
+};
+
+export function getExperiences(locale: Locale): ExperienceEntry[] {
+  return experiencesByLocale[locale];
 }
 
-export function getEarlyCareerNote(): EarlyCareerNote {
-  return earlyCareerNote;
+export function getEarlyCareerNote(locale: Locale): EarlyCareerNote {
+  return earlyCareerByLocale[locale];
 }

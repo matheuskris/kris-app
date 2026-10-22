@@ -1,24 +1,24 @@
 import Link from "next/link";
-import { siteConfig } from "@/lib/content/site";
+import type { Locale } from "@/lib/i18n/locales";
+import { localizeHref } from "@/lib/i18n/paths";
+import { getSiteConfig } from "@/lib/content/site";
 
-export function Footer() {
+export function Footer({ locale }: { locale: Locale }) {
+  const { footer } = getSiteConfig(locale);
+
   return (
-    <footer className="mt-auto w-full border-t border-outline-variant/10 bg-background px-gutter py-16">
-      <div className="mx-auto flex max-w-container-max flex-col items-center justify-between gap-xs md:flex-row">
-        <div className="text-headline-md text-on-surface opacity-80 transition-opacity hover:opacity-100">
-          {siteConfig.brandName}
+    <footer className="w-full py-12">
+      <div className="page-shell flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="font-headline text-[15px] text-on-surface">{footer.precision}</p>
+          <p className="text-label-sm mt-2 text-outline">{footer.copyright}</p>
         </div>
-
-        <p className="text-body-md text-primary opacity-80">
-          {siteConfig.footer.copyright}
-        </p>
-
-        <nav className="flex gap-md">
-          {siteConfig.footer.links.map((link) => (
+        <nav className="text-label-sm flex flex-wrap items-center gap-5 text-on-surface-variant">
+          {footer.links.map((link) => (
             <Link
-              key={link.label}
-              href={link.href}
-              className="text-body-md text-on-surface-variant opacity-80 transition-colors hover:text-primary hover:opacity-100"
+              key={link.href + link.label}
+              href={localizeHref(locale, link.href)}
+              className="transition-colors hover:text-on-surface"
             >
               {link.label}
             </Link>

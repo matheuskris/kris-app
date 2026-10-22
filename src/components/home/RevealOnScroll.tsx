@@ -1,9 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 export function RevealOnScroll({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const elements = document.querySelectorAll(".reveal-item");
+
+    if (reduce) {
+      elements.forEach((element) => element.classList.add("reveal-visible"));
+      return;
+    }
+
+    document.documentElement.classList.add("reveal-armed");
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -13,13 +23,15 @@ export function RevealOnScroll({ children }: { children: React.ReactNode }) {
           }
         });
       },
-      { threshold: 0.15 },
+      { threshold: 0.12 },
     );
 
-    const elements = document.querySelectorAll(".reveal-item");
     elements.forEach((element) => observer.observe(element));
 
-    return () => observer.disconnect();
+    return () => {
+      document.documentElement.classList.remove("reveal-armed");
+      observer.disconnect();
+    };
   }, []);
 
   return <>{children}</>;

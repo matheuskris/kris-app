@@ -13,5 +13,5 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
-  throw new Error(`Not implemented: ${slug}`);
+  return getAllPosts().find((post) => post.slug === slug) ?? null;
 }

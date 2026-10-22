@@ -1,25 +1,35 @@
 "use client";
 
-import Image from "next/image";
+import Link from "next/link";
 import { FormEvent, useState } from "react";
-import {
-  contactFormNetworkErrorMessage,
-  contactFormSuccessMessage,
-  getContactFormErrorMessage,
-} from "@/lib/contact-form-errors";
-import { siteConfig } from "@/lib/content/site";
+import type { Locale } from "@/lib/i18n/locales";
+import { getContactFormCopy, getContactFormErrorMessage } from "@/lib/contact-form-errors";
+import { getSiteConfig } from "@/lib/content/site";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
-export function ContactSection() {
-  const { contact } = siteConfig;
+export function ContactSection({ locale }: { locale: Locale }) {
+  const site = getSiteConfig(locale);
+  const { contact, social, chrome } = site;
+  const formCopy = getContactFormCopy(locale);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [copied, setCopied] = useState(false);
 
   function clearFeedback() {
     if (status === "error" || status === "success") {
       setStatus("idle");
       setErrorMessage("");
+    }
+  }
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(contact.email);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
     }
   }
 
@@ -47,13 +57,13 @@ export function ContactSection() {
         data = (await response.json()) as { code?: unknown; ok?: boolean };
       } catch {
         setStatus("error");
-        setErrorMessage(getContactFormErrorMessage(undefined));
+        setErrorMessage(getContactFormErrorMessage(undefined, locale));
         return;
       }
 
       if (!response.ok || !data?.ok) {
         setStatus("error");
-        setErrorMessage(getContactFormErrorMessage(data?.code));
+        setErrorMessage(getContactFormErrorMessage(data?.code, locale));
         return;
       }
 
@@ -61,130 +71,122 @@ export function ContactSection() {
       form.reset();
     } catch {
       setStatus("error");
-      setErrorMessage(contactFormNetworkErrorMessage);
+      setErrorMessage(formCopy.network);
     }
   }
 
   return (
-    <section
-      id="contact"
-      className="mx-auto mb-xl max-w-container-max px-gutter py-xl"
-    >
-      <div className="reveal-item mx-auto mb-lg max-w-2xl text-center">
-        <h2 className="text-headline-lg mb-sm">{contact.title}</h2>
-        <p className="text-body-md text-on-surface-variant">
-          {contact.subtitle}
-        </p>
-      </div>
-
-      {status === "success" && (
-        <div
-          role="status"
-          aria-live="polite"
-          className="reveal-item mx-auto mb-md flex max-w-4xl items-start gap-sm rounded-xl border border-primary/30 bg-primary/10 px-md py-sm backdrop-blur-xl"
-        >
-          <span
-            className="material-symbols-outlined mt-0.5 shrink-0 text-primary"
-            aria-hidden="true"
-          >
-            check_circle
-          </span>
-          <div>
-            <p className="text-body-md text-on-surface">
-              {contactFormSuccessMessage.title}
-            </p>
-            <p className="text-body-md text-on-surface-variant">
-              {contactFormSuccessMessage.description}
-            </p>
+    <section id="contact" className="page-shell py-20 lg:py-28">
+      <div className="reveal-item mx-auto grid max-w-6xl gap-14 lg:grid-cols-12">
+        <div className="flex flex-col gap-6 lg:col-span-5">
+          <h2 className="text-headline-xl max-w-xl text-on-surface">{contact.title}</h2>
+          <p className="text-body-lg max-w-md text-on-surface-variant">
+            {contact.subtitle}
+          </p>
+          <p className="text-label-sm text-outline">
+            {contact.availability}
+            {" · "}
+            {contact.languages}
+          </p>
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            {social.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="text-label-md text-on-surface-variant underline decoration-transparent underline-offset-4 transition-colors hover:text-on-surface hover:decoration-primary/50"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
-      )}
 
-      <div className="reveal-item delay-100 mx-auto grid max-w-4xl grid-cols-1 items-center gap-lg md:grid-cols-[1fr_auto]">
-        <form
-          onSubmit={handleSubmit}
-          onChange={clearFeedback}
-          className="bento-card flex flex-col gap-md rounded-xl bg-surface/40 p-md backdrop-blur-xl"
-        >
-          <div className="grid grid-cols-1 gap-md md:grid-cols-2">
+        <div className="flex flex-col gap-6 lg:col-span-7">
+          <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
             <div>
-              <label
-                htmlFor="name"
-                className="mb-2 block text-label-md text-on-surface-variant"
-              >
-                Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                disabled={status === "loading"}
-                placeholder="Your Name"
-                className="w-full rounded-lg border border-white/10 bg-surface-container-lowest px-4 py-3 text-on-surface transition-colors focus:border-primary focus:outline-none disabled:opacity-60"
-              />
+              <p className="text-label-sm text-outline">{chrome.primaryCommunication}</p>
+              <p className="text-body-md mt-0.5 text-on-surface">{contact.email}</p>
             </div>
-
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-2 block text-label-md text-on-surface-variant"
-              >
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                disabled={status === "loading"}
-                placeholder="hello@example.com"
-                className="w-full rounded-lg border border-white/10 bg-surface-container-lowest px-4 py-3 text-on-surface transition-colors focus:border-primary focus:outline-none disabled:opacity-60"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="message"
-              className="mb-2 block text-label-md text-on-surface-variant"
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="text-label-sm text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary"
             >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={4}
-              required
-              disabled={status === "loading"}
-              placeholder="Tell me about your project..."
-              className="w-full resize-none rounded-lg border border-white/10 bg-surface-container-lowest px-4 py-3 text-on-surface transition-colors focus:border-primary focus:outline-none disabled:opacity-60"
-            />
+              {copied ? chrome.copied : chrome.copyAddress}
+            </button>
           </div>
 
-          {status === "error" && (
-            <p className="text-body-md text-tertiary" role="alert">
-              {errorMessage}
-            </p>
+          {status === "success" && (
+            <div role="status" aria-live="polite">
+              <p className="text-body-md text-on-surface">{formCopy.success.title}</p>
+              <p className="text-body-sm text-on-surface-variant">
+                {formCopy.success.description}
+              </p>
+            </div>
           )}
 
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="primary-btn ml-auto w-full rounded-full px-6 py-3 text-label-md text-white disabled:cursor-not-allowed disabled:opacity-60 md:w-max"
+          <form
+            onSubmit={handleSubmit}
+            onChange={clearFeedback}
+            className="flex flex-col gap-4"
           >
-            {status === "loading" ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-
-        <div className="mx-auto shrink-0 overflow-hidden rounded-xl border border-white/10 shadow-2xl md:mx-0">
-          <Image
-            src={contact.avatarUrl}
-            alt={contact.avatarAlt}
-            width={240}
-            height={240}
-            className="h-48 w-48 object-cover md:h-60 md:w-60"
-          />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <label htmlFor="name" className="text-label-sm mb-2 block text-outline">
+                  {chrome.name}
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  disabled={status === "loading"}
+                  placeholder={chrome.namePlaceholder}
+                  className="field"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="text-label-sm mb-2 block text-outline">
+                  {chrome.email}
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  disabled={status === "loading"}
+                  placeholder="hello@example.com"
+                  className="field"
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="message" className="text-label-sm mb-2 block text-outline">
+                {chrome.message}
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                required
+                disabled={status === "loading"}
+                placeholder={chrome.messagePlaceholder}
+                className="field resize-none"
+              />
+            </div>
+            {status === "error" && (
+              <p className="text-body-sm text-tertiary" role="alert">
+                {errorMessage}
+              </p>
+            )}
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="btn-primary text-label-md ml-auto w-full px-5 py-2.5 disabled:cursor-not-allowed disabled:opacity-60 md:w-max"
+            >
+              {status === "loading" ? chrome.sending : chrome.sendMessage}
+            </button>
+          </form>
         </div>
       </div>
     </section>

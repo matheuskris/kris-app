@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { siteConfig } from "@/lib/content/site";
+import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { locales, localeFromPathname, type Locale } from "@/lib/i18n/locales";
+import { localizeHref, switchLocalePath } from "@/lib/i18n/paths";
+import { getSiteConfig } from "@/lib/content/site";
 
-const SECTION_IDS = siteConfig.nav
-  .filter((item) => item.href.startsWith("#"))
-  .map((item) => item.href.slice(1));
-
-function useActiveSection() {
+function useActiveSection(sectionIds: string[]) {
   const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
@@ -17,79 +16,174 @@ function useActiveSection() {
     const pick = () => {
       let best = 0;
       let winner: string | null = null;
-      ratios.forEach((r, id) => {
-        if (r > best) { best = r; winner = id; }
+      ratios.forEach((ratio, id) => {
+        if (ratio > best) {
+          best = ratio;
+          winner = id;
+        }
       });
       setActive(winner);
     };
 
-    const thresholds = Array.from({ length: 21 }, (_, i) => i / 20);
-    const observers = SECTION_IDS.map((id) => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => { ratios.set(id, entry.intersectionRatio); pick(); },
-        { threshold: thresholds }
+    const thresholds = Array.from({ length: 21 }, (_, index) => index / 20);
+    const observers = sectionIds.map((id) => {
+      const element = document.getElementById(id);
+      if (!element) return null;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          ratios.set(id, entry.intersectionRatio);
+          pick();
+        },
+        { threshold: thresholds },
       );
-      obs.observe(el);
-      return obs;
+      observer.observe(element);
+      return observer;
     });
 
-    return () => observers.forEach((o) => o?.disconnect());
-  }, []);
+    return () => observers.forEach((observer) => observer?.disconnect());
+  }, [sectionIds]);
 
   return active;
 }
 
-function MaterialIcon({ name }: { name: string }) {
+function LanguageSwitch({ locale }: { locale: Locale }) {
+  const pathname = usePathname();
+  const [hash, setHash] = useState("");
+  const { chrome } = getSiteConfig(locale);
+
+  useEffect(() => {
+    const sync = () => setHash(window.location.hash);
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, [pathname]);
+
   return (
-    <span className="material-symbols-outlined text-[20px] leading-none">
-      {name}
-    </span>
+    <div
+      className="text-label-sm flex items-center rounded-full border border-outline-variant/50 p-0.5"
+      role="group"
+      aria-label={chrome.language}
+    >
+      {locales.map((code) => {
+        const active = code === locale;
+        return (
+          <Link
+            key={code}
+            href={switchLocalePath(pathname, code, hash)}
+            hrefLang={code}
+            lang={code}
+            aria-current={active ? "true" : undefined}
+            className={`rounded-full px-2 py-0.5 transition-colors ${
+              active
+                ? "bg-surface-container-high text-on-surface"
+                : "text-outline hover:text-on-surface"
+            }`}
+          >
+            {code.toUpperCase()}
+          </Link>
+        );
+      })}
+    </div>
   );
 }
 
-export function Header() {
-  const activeSection = useActiveSection();
+export function Header({ locale }: { locale: Locale }) {
+  const site = getSiteConfig(locale);
+  const sectionIds = useMemo(
+    () =>
+      site.nav
+        .filter((item) => item.href.startsWith("#"))
+        .map((item) => item.href.slice(1)),
+    [site.nav],
+  );
+  const activeSection = useActiveSection(sectionIds);
+  const [open, setOpen] = useState(false);
+  const current = localeFromPathname(usePathname()) ?? locale;
 
   return (
-    <header className="glass-nav fixed top-4 left-1/2 z-50 flex w-[95%] max-w-5xl -translate-x-1/2 items-center justify-between rounded-full px-6 py-3 shadow-2xl">
-      <Link
-        href="/"
-        className="text-headline-md font-bold tracking-tight text-on-surface"
-      >
-        {siteConfig.brandName}
-      </Link>
+    <header className="fixed top-0 z-50 w-full border-b border-outline-variant/25 bg-canvas/80 backdrop-blur-xl">
+      <div className="page-shell flex h-16 items-center justify-between gap-4">
+        <Link
+          href={localizeHref(current, "/")}
+          className="font-headline min-w-0 truncate text-[15px] tracking-tight text-on-surface transition-colors hover:text-primary"
+        >
+          {site.brandMark}
+        </Link>
 
-      <nav className="hidden items-center gap-md md:flex">
-        {siteConfig.nav.map((item) => {
-          const sectionId = item.href.startsWith("#") ? item.href.slice(1) : null;
-          const isActive = sectionId ? activeSection === sectionId : false;
+        <nav className="hidden items-center gap-7 lg:flex">
+          {site.nav.map((item) => {
+            const sectionId = item.href.startsWith("#")
+              ? item.href.slice(1)
+              : null;
+            const isActive = sectionId ? activeSection === sectionId : false;
 
-          return (
+            return (
+              <Link
+                key={item.href}
+                href={localizeHref(current, item.href)}
+                className={`text-label-md py-1 transition-colors ${
+                  isActive
+                    ? "text-on-surface"
+                    : "text-on-surface-variant hover:text-on-surface"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <LanguageSwitch locale={current} />
+          <Link
+            href={localizeHref(current, "/#contact")}
+            className="text-label-md hidden text-on-surface-variant transition-colors hover:text-on-surface sm:inline-flex"
+          >
+            {site.chrome.getInTouch}
+          </Link>
+          <button
+            type="button"
+            className="text-label-sm rounded-full border border-outline-variant/50 px-3 py-1 text-on-surface lg:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? site.chrome.close : site.chrome.menu}
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <nav
+          id="mobile-nav"
+          className="page-shell flex flex-col gap-3 border-t border-outline-variant/20 py-4 lg:hidden"
+        >
+          {site.nav.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
-              className={`nav-link text-label-md ${isActive ? "active" : "text-on-surface-variant"}`}
+              href={localizeHref(current, item.href)}
+              className="text-label-md text-on-surface-variant"
+              onClick={() => setOpen(false)}
             >
               {item.label}
             </Link>
-          );
-        })}
-      </nav>
-
-      <div className="flex items-center gap-xs text-primary">
-        {siteConfig.social.map((item) => (
+          ))}
           <Link
-            key={item.label}
-            href={item.href}
-            aria-label={item.label}
-            className="flex items-center justify-center rounded-full p-2 transition-all duration-300 hover:bg-white/5"
+            href={localizeHref(current, "/projects")}
+            className="text-label-md text-on-surface-variant"
+            onClick={() => setOpen(false)}
           >
-            <MaterialIcon name={item.icon} />
+            {site.chrome.projectsIndex}
           </Link>
-        ))}
-      </div>
+          <Link
+            href={localizeHref(current, "/blog")}
+            className="text-label-md text-on-surface-variant"
+            onClick={() => setOpen(false)}
+          >
+            {site.chrome.blog}
+          </Link>
+        </nav>
+      )}
     </header>
   );
 }
