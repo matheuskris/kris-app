@@ -10,8 +10,8 @@ import type {
 const links = {
   linkedin: "https://www.linkedin.com/in/matheuskris/",
   github: "https://github.com/matheuskris",
-  email: "mailto:matheuskris@gmail.com",
-  emailAddress: "matheuskris@gmail.com",
+  email: "mailto:matheus.kris@gmail.com",
+  emailAddress: "matheus.kris@gmail.com",
 } as const;
 
 export const siteConfigPt: SiteConfig = {

@@ -39,7 +39,7 @@ A bilingual professional showcase of real production systems (healthcare billing
 
 - Name: Matheus Krisciumas. Mark in English chrome: `MATHEUS`.
 - Role language in current copy: software engineer / full-stack; remote, Brazil, UTC-3; English and Portuguese.
-- Public links: GitHub `https://github.com/matheuskris`, LinkedIn `https://www.linkedin.com/in/matheuskris/`, email `matheuskris@gmail.com`.
+- Public links: GitHub `https://github.com/matheuskris`, LinkedIn `https://www.linkedin.com/in/matheuskris/`, email `matheus.kris@gmail.com`.
 - Status: open to conversations; available remotely.
 - Keep the on-site contact form and LinkedIn as contact paths.
 
