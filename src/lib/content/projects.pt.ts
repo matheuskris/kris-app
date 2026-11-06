@@ -7,9 +7,9 @@ export const projectsPt: Project[] = [
     kicker: "DBKZ",
     title: "Faturamento médico em 74 hospitais",
     description:
-      "Produto de faturamento de ponta a ponta para uma operação médica que movimenta cerca de R$ 1,5 milhão por mês.",
+      "Sistema de faturamento de ponta a ponta para uma operação médica que movimenta cerca de R$ 1,5 milhão por mês.",
     challenge:
-      "Assumir o desenho do sistema, a organização na nuvem e a modelagem SQL de 25 mil parâmetros de pagamento e 4 mil procedimentos — sem um segundo engenheiro no produto.",
+      "Desenhar a arquitetura, organizar a nuvem e modelar em SQL 25 mil parâmetros de pagamento e 4 mil procedimentos — sem um segundo engenheiro no produto.",
     outcome:
       "Entreguei a API em NestJS, o app em React Native e o web em Next.js, e integrei boleto, e-mail, WhatsApp, uploads e analytics.",
     stack: ["NestJS", "Next.js", "React Native", "SQL"],
@@ -19,16 +19,16 @@ export const projectsPt: Project[] = [
     startedAt: "2024-09",
     visual: "ledger",
     visualTitle: "billing_flow.trace",
-    visualStatus: "LIVE // DBKZ",
+    visualStatus: "EM PRODUÇÃO // DBKZ",
     steps: [
-      { title: "Resolver parâmetros de pagamento", detail: "25 mil regras" },
-      { title: "Casar códigos de procedimento", detail: "4 mil procedimentos" },
+      { title: "Aplicar as regras de pagamento", detail: "25 mil regras" },
+      { title: "Cruzar códigos de procedimento", detail: "4 mil procedimentos" },
       { title: "Emitir boleto e avisar", detail: "e-mail + WhatsApp" },
     ],
     stats: [
       { label: "Hospitais", value: "74" },
       { label: "Mensal", value: "R$ 1,5 mi" },
-      { label: "Superfícies", value: "3" },
+      { label: "Apps", value: "3" },
     ],
     images: [
       {
@@ -36,29 +36,30 @@ export const projectsPt: Project[] = [
         alt: "Console web da DBKZ para registro de imagem: agenda enviada, prompt de extração e campos de faturamento de hospital e convênio.",
         width: 1024,
         height: 591,
-        caption: "Console de registro: o documento vira procedimento faturável, ainda com hospital e convênio para casar.",
+        caption:
+          "Console de registro: o documento vira procedimento faturável, ainda com hospital e convênio para cruzar.",
       },
     ],
-    idea: "Faturamento aqui não é um checkout. É casar dezenas de milhares de regras de pagamento com códigos de procedimento para os hospitais emitirem boleto todo mês — sem um segundo engenheiro no produto.",
+    idea: "Aqui o faturamento não é um checkout. É cruzar dezenas de milhares de regras de pagamento com códigos de procedimento para os hospitais emitirem boleto todo mês — sem um segundo engenheiro no produto.",
     body: [
       {
         heading: "A situação",
         paragraphs: [
-          "A operação movimenta cerca de R$ 1,5 milhão por mês em 74 hospitais. O produto precisava dono do caminho inteiro: qual regra vale, qual procedimento está sendo faturado, como o boleto sai e como o hospital é avisado.",
-          "Eu era o único engenheiro nessa superfície. Desenho do sistema, nuvem e modelo SQL ficavam no mesmo lugar que os apps que as pessoas de fato usavam.",
+          "A operação movimenta cerca de R$ 1,5 milhão por mês em 74 hospitais. O produto precisava de um dono de ponta a ponta: qual regra vale, qual procedimento está sendo faturado, como o boleto sai e como o hospital é avisado.",
+          "Eu era o único engenheiro nessa frente. Arquitetura, nuvem e modelo SQL ficavam no mesmo lugar que os apps que as pessoas de fato usavam.",
         ],
       },
       {
         heading: "Como funciona",
         paragraphs: [
-          "Tratar o faturamento como um motor de regras com uma superfície humana, não como um formulário que despeja numa planilha. Vinte e cinco mil parâmetros de pagamento e quatro mil procedimentos têm que virar um documento pagável. Se o casamento erra, o mês não fecha.",
-          "O trabalho era deixar esse casamento chato: modelar em SQL, expor numa API NestJS e dar aos operadores um console Next.js e um app React Native no mesmo contrato.",
+          "A aposta era tratar o faturamento como um motor de regras com uma tela para gente usar, não como um formulário que despeja numa planilha. Vinte e cinco mil parâmetros de pagamento e quatro mil procedimentos têm que virar um documento pagável. Se o cruzamento erra, o mês não fecha.",
+          "O trabalho era tornar esse cruzamento previsível: modelar em SQL, expor numa API NestJS e dar aos operadores um console Next.js e um app React Native no mesmo contrato.",
         ],
       },
       {
-        heading: "O que saiu",
+        heading: "O que entreguei",
         paragraphs: [
-          "API, mobile e web saíram juntos. Boleto, e-mail, WhatsApp, uploads e analytics entraram no mesmo fluxo para o procedimento faturado não morrer num canal paralelo.",
+          "API, mobile e web saíram juntos. Boleto, e-mail, WhatsApp, uploads e analytics entraram no mesmo fluxo para o procedimento faturado não se perder num canal paralelo.",
         ],
       },
     ],
@@ -68,11 +69,11 @@ export const projectsPt: Project[] = [
     slug: "witek-maps",
     ref: "SYS.REF: 02 // GEOSPATIAL",
     kicker: "WITEK",
-    title: "Carga do mapa de imóveis, pela metade",
+    title: "Mapa de imóveis na metade do tempo",
     description:
-      "Trabalho de estabilidade numa plataforma legada de mapa de imóveis usada por cartórios brasileiros.",
+      "Estabilidade numa plataforma legada de mapa de imóveis usada por cartórios no Brasil.",
     challenge:
-      "Uma base PHP e JavaScript sem documentação falhava no horário de pico. Consultas do mapa e o tratamento de coordenadas eram o gargalo.",
+      "Uma base PHP e JavaScript sem documentação falhava no horário de pico. As consultas do mapa e o tratamento de coordenadas eram o gargalo.",
     outcome:
       "Refatorei consultas e rotas críticas, cortei o tempo de carga em cerca de 50% e acrescentei a conversão de UTM para WGS84 para os dados geoespaciais ficarem consistentes.",
     stack: ["PHP", "JavaScript", "Geoespacial", "Desempenho"],
@@ -86,8 +87,8 @@ export const projectsPt: Project[] = [
     steps: [
       { title: "Viewport do mapa no cliente", detail: "pedido de bbox" },
       { title: "Conversão UTM → WGS84", detail: "coords normalizadas" },
-      { title: "Consultas críticas refatoradas", detail: "menos idas e voltas" },
-      { title: "Render estável no pico", detail: "quedas removidas" },
+      { title: "Consultas críticas refatoradas", detail: "menos idas ao banco" },
+      { title: "Render estável no pico", detail: "sem quedas" },
     ],
     stats: [
       { label: "Tempo de carga", value: "~50%" },
@@ -103,25 +104,25 @@ export const projectsPt: Project[] = [
         caption: "Mapa de imóveis: camadas, busca por endereço e overlay UTM no viewport.",
       },
     ],
-    idea: "O mapa já estava em produção. O trabalho era sobreviver ao horário de pico: o gargalo era consulta e coordenada, não uma feature faltando.",
+    idea: "O mapa já estava em produção. O trabalho era aguentar o horário de pico: o gargalo era consulta e conversão de coordenadas, não uma funcionalidade faltando.",
     body: [
       {
         heading: "A situação",
         paragraphs: [
-          "Cartórios brasileiros já usavam a plataforma de mapa de imóveis. No pico, ela falhava. A base era PHP e JavaScript sem documentação, então o primeiro trabalho era achar quais pedidos de fato doíam.",
+          "Cartórios no Brasil já usavam a plataforma de mapa de imóveis. No pico, ela falhava. A base era PHP e JavaScript sem documentação, então o primeiro trabalho era achar quais pedidos de fato doíam.",
         ],
       },
       {
         heading: "Como funciona",
         paragraphs: [
-          "O viewport do mapa é uma bounding box. Se essa caixa é consultada do jeito longo, e se as coordenadas estão em UTM enquanto o cliente espera WGS84, a página não só fica errada — ela estoura o tempo.",
-          "A ideia era cortar as idas e voltas no caminho crítico e colocar a conversão no pipeline para o dado geoespacial ficar consistente, em vez de ser remendado no browser.",
+          "O viewport do mapa é uma bounding box. Se essa caixa é consultada do jeito longo, e se as coordenadas estão em UTM enquanto o cliente espera WGS84, a página não só fica errada — ela estoura o timeout.",
+          "A ideia era cortar as idas ao banco no caminho crítico e colocar a conversão no pipeline para o dado geoespacial ficar consistente, em vez de ser remendado no navegador.",
         ],
       },
       {
-        heading: "O que saiu",
+        heading: "O que entreguei",
         paragraphs: [
-          "Consultas e rotas críticas foram refatoradas. O tempo de carga caiu pela metade. Queda no pico deixou de ser o caso normal. A conversão de UTM para WGS84 agora faz parte do pedido, não um chute local.",
+          "Consultas e rotas críticas foram refatoradas. O tempo de carga caiu pela metade. Queda no pico deixou de ser o caso normal. A conversão de UTM para WGS84 agora faz parte do pedido, não um palpite no navegador.",
         ],
       },
     ],
@@ -131,9 +132,9 @@ export const projectsPt: Project[] = [
     slug: "keiken-money",
     ref: "SYS.REF: 03 // MONEY MOVEMENT",
     kicker: "Keiken",
-    title: "Movimentação de dinheiro assíncrona num marketplace de benefícios",
+    title: "Pagamentos assíncronos num marketplace de benefícios",
     description:
-      "Responsabilidade de backend nos fluxos entre parceiros, clientes e empresas associadas.",
+      "Backend dos fluxos entre parceiros, clientes e empresas associadas.",
     challenge:
       "O dinheiro precisava se mover com confiabilidade entre as partes. Aprendi Java e Spring Boot no trabalho para estender uma API existente sem quebrar a liquidação.",
     outcome:
@@ -147,14 +148,14 @@ export const projectsPt: Project[] = [
     visualTitle: "settlement.workers",
     visualStatus: "~R$ 120 MIL / MÊS",
     steps: [
-      { title: "Evento do parceiro ingerido", detail: "Spring Messaging" },
+      { title: "Evento do parceiro entra", detail: "Spring Messaging" },
       { title: "Cron liquida o lote", detail: "agendado" },
-      { title: "QueryDSL lê o livro", detail: "filtros complexos" },
-      { title: "JUnit protege o caminho", detail: "rede de regressão" },
+      { title: "QueryDSL lê os lançamentos", detail: "filtros complexos" },
+      { title: "JUnit protege o caminho", detail: "testes de regressão" },
     ],
     stats: [
       { label: "Mensal", value: "R$ 120 mil" },
-      { label: "Estilo", value: "Assíncrono" },
+      { label: "Modo", value: "Assíncrono" },
       { label: "Testes", value: "JUnit" },
     ],
     images: [
@@ -163,7 +164,7 @@ export const projectsPt: Project[] = [
         alt: "Marketplace da Keiken listando uma psicóloga com preço, filtros e calendário de agendamento.",
         width: 1024,
         height: 590,
-        caption: "Superfície do marketplace: especialistas, filtros e agendamento.",
+        caption: "Marketplace: especialistas, filtros e agendamento.",
       },
       {
         src: "/projects/keiken/payment-flow.jpg",
@@ -184,12 +185,12 @@ export const projectsPt: Project[] = [
       {
         heading: "Como funciona",
         paragraphs: [
-          "O evento do parceiro entra, um worker liquida o lote, e o livro é lido com filtros que doeriam como SQL ad hoc. O mês gira cerca de R$ 120 mil. Se esse caminho é síncrono, um parceiro lento segura todo mundo.",
-          "A ideia era tratar a movimentação como mensagem mais um fechamento agendado, e colocar JUnit no caminho para uma mudança no QueryDSL não pular uma parte em silêncio.",
+          "O evento do parceiro entra, um worker liquida o lote, e os lançamentos são lidos com filtros que doeriam como SQL solto. O mês gira cerca de R$ 120 mil. Se esse caminho é síncrono, um parceiro lento segura todo mundo.",
+          "A ideia era tratar o pagamento como mensagem mais um fechamento agendado, e colocar JUnit no caminho para uma mudança no QueryDSL não deixar um parceiro de fora sem ninguém perceber.",
         ],
       },
       {
-        heading: "O que saiu",
+        heading: "O que entreguei",
         paragraphs: [
           "Fluxos assíncronos com Spring Messaging, cron jobs para o lote, QueryDSL para as leituras complexas e testes de regressão no caminho da liquidação.",
         ],
@@ -205,7 +206,7 @@ export const projectsPt: Project[] = [
     description:
       "Mobile, web, API e banco para um fluxo de encaminhamento em saúde.",
     challenge:
-      "Ainda não existia nada. O produto precisava de pagamentos, mensagens, uploads e um chat que ficasse sincronizado entre os clientes.",
+      "Ainda não existia nada. O produto precisava de pagamentos, mensagens, uploads e um chat sincronizado entre os apps.",
     outcome:
       "Entreguei React Native, Next.js e uma API tRPC/Prisma, e depois PIX, e-mail, WhatsApp, uploads, analytics e chat em tempo real com Firebase.",
     stack: ["Next.js", "tRPC", "Prisma", "React Native", "Firebase"],
@@ -215,15 +216,15 @@ export const projectsPt: Project[] = [
     startedAt: "2024-01",
     visual: "surfaces",
     visualTitle: "product.surfaces",
-    visualStatus: "ENTREGUE 2024",
+    visualStatus: "ENTREGUE EM 2024",
     steps: [
-      { title: "Cliente React Native", detail: "encaminhamentos" },
+      { title: "App React Native", detail: "encaminhamentos" },
       { title: "Console Next.js", detail: "operadores" },
       { title: "API tRPC + Prisma", detail: "modelo SQL" },
       { title: "Chat Firebase", detail: "sync em tempo real" },
     ],
     stats: [
-      { label: "Clientes", value: "2" },
+      { label: "Apps", value: "2" },
       { label: "Pagamentos", value: "PIX" },
       { label: "Chat", value: "Firebase" },
     ],
@@ -236,7 +237,7 @@ export const projectsPt: Project[] = [
         caption: "Console do operador: colegas da rede do consultório, por especialidade.",
       },
     ],
-    idea: "Ainda não existia nada. O produto tinha que ser o próprio fluxo de encaminhamento: duas superfícies, uma API, pagamentos e um chat que não divergisse entre os clientes.",
+    idea: "Ainda não existia nada. O produto tinha que ser o próprio fluxo de encaminhamento: dois apps, uma API, pagamentos e um chat que não divergisse entre as telas.",
     body: [
       {
         heading: "A situação",
@@ -247,14 +248,14 @@ export const projectsPt: Project[] = [
       {
         heading: "Como funciona",
         paragraphs: [
-          "Construir as três superfícies contra um contrato. React Native para o encaminhamento em campo, Next.js para quem opera a fila, tRPC e Prisma para o modelo. O chat precisava ficar sincronizado, então o Firebase ficou ao lado do SQL em vez de fingir que SQL é tempo real.",
+          "A aposta era construir os três lados contra um contrato. React Native para o encaminhamento em campo, Next.js para quem opera a fila, tRPC e Prisma para o modelo. O chat precisava ficar sincronizado, então o Firebase ficou ao lado do SQL em vez de fingir que SQL é tempo real.",
           "PIX, e-mail, WhatsApp, uploads e analytics entram nesse mesmo caminho para o encaminhamento não sair do produto para terminar.",
         ],
       },
       {
-        heading: "O que saiu",
+        heading: "O que entreguei",
         paragraphs: [
-          "A stack saiu como um produto em 2024, usada por dois clientes, com modelo SQL e um canal em tempo real que não brigam entre si.",
+          "A stack saiu como um produto em 2024, usada em dois apps, com modelo SQL e um canal em tempo real que não brigam entre si.",
         ],
       },
     ],
@@ -266,11 +267,11 @@ export const projectsPt: Project[] = [
     kicker: "Caixa Flow",
     title: "Controle de fundo fixo para equipes de campo",
     description:
-      "SaaS B2B só por convite que troca planilha e WhatsApp no fundo fixo: gastar, anexar comprovante, revisar, reembolsar.",
+      "SaaS B2B só por convite que substitui planilha e WhatsApp no fundo fixo: gastar, anexar comprovante, revisar, reembolsar.",
     challenge:
-      "Uma construtora de médio porte rodava fundos fixos no Excel e em dumps de foto no WhatsApp. Encarregados gastavam do float; o financeiro remontava o mês a partir de prints; o reembolso atrasava porque ninguém sabia quais comprovantes já tinham sido pagos.",
+      "Uma construtora de médio porte rodava fundos fixos no Excel e em montes de foto no WhatsApp. Encarregados gastavam do caixa; o financeiro remontava o mês a partir de prints; o reembolso atrasava porque ninguém sabia quais comprovantes já tinham sido pagos.",
     outcome:
-      "Entreguei uma camada operacional fechada e multi-tenant — acesso só por convite, comprovante guardado com a despesa e o loop gastar → revisar → pagar, com guards de papel, RLS no Postgres e exportações em Excel/ZIP.",
+      "Entreguei um sistema fechado e multiempresa — acesso só por convite, comprovante guardado com a despesa e o ciclo gastar → revisar → pagar, com permissão por perfil, RLS no Postgres e exportações em Excel/ZIP.",
     stack: ["Next.js", "Supabase", "TypeScript", "Vercel"],
     featured: true,
     kind: "personal",
@@ -280,15 +281,15 @@ export const projectsPt: Project[] = [
     visualTitle: "fundo_fixo.loop",
     visualStatus: "SÓ POR CONVITE",
     steps: [
-      { title: "Abrir um fundo contra o float", detail: "valor_base" },
+      { title: "Abrir um fundo contra o caixa", detail: "valor_base" },
       { title: "Lançar gasto com comprovante", detail: "foto ou PDF" },
       { title: "Pedir fechamento; financeiro revisa", detail: "aprovar / recusar" },
       { title: "Registrar pagamento; arquivar o fundo", detail: "Excel + ZIP" },
     ],
     stats: [
       { label: "Acesso", value: "Convite" },
-      { label: "Papéis", value: "4" },
-      { label: "Tenancy", value: "Isolado" },
+      { label: "Perfis", value: "4" },
+      { label: "Dados", value: "Isolados" },
     ],
     images: [
       {
@@ -306,33 +307,33 @@ export const projectsPt: Project[] = [
         caption: "Console financeiro: revisão do fundo, totais e exportação para Excel.",
       },
     ],
-    idea: "Fundo fixo quebra quando o comprovante mora no WhatsApp e o float mora no Excel. A ideia é um loop fechado: um fundo ativo, o comprovante colado na despesa, depois revisão e pagamento — só por convite, uma empresa de cada vez.",
+    idea: "Fundo fixo quebra quando o comprovante mora no WhatsApp e o caixa mora no Excel. A ideia é um ciclo fechado: um fundo ativo, o comprovante na despesa, depois revisão e pagamento — só por convite, uma empresa de cada vez.",
     body: [
       {
         heading: "A situação",
         paragraphs: [
-          "Uma construtora de médio porte rodava fundos fixos para equipes em vários canteiros. Encarregados gastavam do float. Fotos de nota se acumulavam em grupos de WhatsApp. O financeiro remontava o mês a partir de prints. O reembolso atrasava porque ninguém sabia quais comprovantes já tinham sido pagos.",
-          "Precisavam de um sistema fechado: só gente convidada, comprovante guardado com a despesa, e um loop que se pudesse seguir do gasto até o pagamento.",
+          "Uma construtora de médio porte rodava fundos fixos para equipes em vários canteiros. Encarregados gastavam do caixa. Fotos de nota se acumulavam em grupos de WhatsApp. O financeiro remontava o mês a partir de prints. O reembolso atrasava porque ninguém sabia quais comprovantes já tinham sido pagos.",
+          "Precisavam de um sistema fechado: só gente convidada, comprovante guardado com a despesa, e um ciclo que se pudesse seguir do gasto até o pagamento.",
         ],
       },
       {
         heading: "Como funciona",
         paragraphs: [
-          "Caixa Flow é a camada operacional desse loop. O funcionário tem um float (valor_base) e um fundo fixo ativo por vez. Fotografa a nota, preenche tipo, número, fornecedor, categoria e obra opcional, e lança. No fim do período pede fechamento. O financeiro aprova ou recusa cada linha, confirma o total, registra o pagamento. O fundo arquiva; outro pode abrir.",
+          "Caixa Flow é a operação desse ciclo. O funcionário tem um caixa (valor_base) e um fundo fixo ativo por vez. Fotografa a nota, preenche tipo, número, fornecedor, categoria e obra opcional, e lança. No fim do período pede fechamento. O financeiro aprova ou recusa cada linha, confirma o total, registra o pagamento. O fundo arquiva; outro pode abrir.",
           "Sócios convidam admins. Admins convidam funcionários. Um super admin coloca empresas. O resto fica de fora. Os dados são isolados por empresa. Não há cadastro público.",
         ],
       },
       {
         heading: "O que cobre",
         paragraphs: [
-          "Quatro papéis: admin da plataforma, sócio, admin da empresa, funcionário. Cadastro de obras com restrição opcional por pessoa. Histórico de pagamento. Exportação em Excel e ZIP para o contador. Notificação no app e e-mail no fechamento, na confirmação e no pagamento. Comprovantes num bucket privado, apagados depois da janela de retenção. Login, aceite de convite, reset de senha.",
-          "A segurança é em camadas: proxy de rota por papel, guards de layout e RLS no Postgres. Escritas sensíveis passam por RPCs SECURITY DEFINER.",
+          "Quatro perfis: admin da plataforma, sócio, admin da empresa, funcionário. Cadastro de obras com restrição opcional por pessoa. Histórico de pagamento. Exportação em Excel e ZIP para o contador. Notificação no app e e-mail no fechamento, na confirmação e no pagamento. Comprovantes num bucket privado, apagados depois da janela de retenção. Login, aceite de convite, reset de senha.",
+          "A segurança é em camadas: proxy de rota por perfil, guards de layout e RLS no Postgres. Escritas sensíveis passam por RPCs SECURITY DEFINER.",
         ],
       },
       {
         heading: "O que não é",
         paragraphs: [
-          "O MVP não é cadastro público nem billing, não é integração bancária ou PIX, não é categoria custom por empresa e não é app nativo. É web responsiva com a câmera no browser.",
+          "O MVP não tem cadastro aberto nem cobrança de assinatura, não integra banco nem PIX, não tem categoria custom por empresa e não é app nativo. É web responsiva com a câmera no navegador.",
         ],
       },
     ],
@@ -344,11 +345,11 @@ export const projectsPt: Project[] = [
     kicker: "Staff Flow",
     title: "Folha de ponto e fechamento mensal para equipes de campo",
     description:
-      "App web para empresas que espalham gente em obras: horas no canteiro, conferência do engenheiro e fechamento do mês com hora extra e adicional noturno.",
+      "App web para empresas com gente em várias obras: horas no canteiro, conferência do engenheiro e fechamento do mês com hora extra e adicional noturno.",
     challenge:
-      "Uma construtora em vários estados guardava horas em fotos no WhatsApp e no Excel. As regras de sábado e feriado mudavam por cidade, o noturno era esquecido, e o fim do mês era três pessoas reconciliando a mesma grade.",
+      "Uma construtora em vários estados guardava horas em fotos no WhatsApp e no Excel. As regras de sábado e feriado mudavam por cidade, o noturno era esquecido, e o fim do mês era três pessoas conferindo a mesma grade.",
     outcome:
-      "Entreguei o loop obra → ponto → conferência → fechamento: adm de obra lança o dia, engenheiro confirma as horas, o RH fecha a folha com regras municipais brasileiras, e os sócios veem custo por obra — não um dump de células.",
+      "Entreguei o ciclo obra → ponto → conferência → fechamento: adm de obra lança o dia, engenheiro confirma as horas, o RH fecha a folha com regras municipais brasileiras, e os sócios veem custo por obra — não uma planilha solta.",
     stack: ["Next.js", "Cloudflare", "Drizzle", "TypeScript"],
     featured: true,
     kind: "personal",
@@ -364,7 +365,7 @@ export const projectsPt: Project[] = [
       { title: "O escritório fecha o mês", detail: "trilha da folha" },
     ],
     stats: [
-      { label: "Papéis", value: "7" },
+      { label: "Perfis", value: "7" },
       { label: "Regras", value: "Locais" },
       { label: "Fechamento", value: "Mensal" },
     ],
@@ -382,27 +383,27 @@ export const projectsPt: Project[] = [
       {
         heading: "A situação",
         paragraphs: [
-          "Construtoras e empresas de campo espalham gente em obras. As horas viviam em foto no WhatsApp e no Excel. Sábado e feriado mudavam por cidade. O adicional noturno era esquecido. O fim do mês era três pessoas reconciliando a mesma grade.",
-          "Precisavam de um lugar em que quem está no canteiro registra o dia, o engenheiro confirma as horas e o escritório fecha a folha com regra brasileira — feriado municipal, percentual estadual, 50/60/70/100/110, noturno — enquanto os sócios veem custo por obra, não um dump de células.",
+          "Construtoras e empresas de campo espalham gente em obras. As horas viviam em foto no WhatsApp e no Excel. Sábado e feriado mudavam por cidade. O adicional noturno era esquecido. O fim do mês era três pessoas conferindo a mesma grade.",
+          "Precisavam de um lugar em que quem está no canteiro registra o dia, o engenheiro confirma as horas e o escritório fecha a folha com regra brasileira — feriado municipal, percentual estadual, 50/60/70/100/110, noturno — enquanto os sócios veem custo por obra, não uma planilha solta.",
         ],
       },
       {
         heading: "Como funciona",
         paragraphs: [
-          "Staff Flow é esse loop: obra → ponto → conferência → fechamento. As obras amarram num município (IBGE), então feriado e extra seguem o lugar do trabalho. Super admin gerencia empresas; cada uma tem gente, obras e regras próprias. O acesso é por papel: super admin, sócio, RH, supervisor, adm de obra, engenheiro, funcionário.",
+          "Staff Flow é esse ciclo: obra → ponto → conferência → fechamento. As obras amarram num município (IBGE), então feriado e extra seguem o lugar do trabalho. Super admin gerencia empresas; cada uma tem gente, obras e regras próprias. O acesso é por perfil: super admin, sócio, RH, supervisor, adm de obra, engenheiro, funcionário.",
           "O lançamento diário cobre entrada/saída, falta, atestado, tipos de extra, horas noturnas, alocação em obra e histórico de edição. O engenheiro revisa a folha. O supervisor confere antes do fechamento. O mês abre e fecha com breakdown da folha, ajuste de extra por obra e memorial do adicional. Pagamento fica pendente ou pago no período.",
         ],
       },
       {
         heading: "O que cobre",
         paragraphs: [
-          "Pessoas com cargo, salário, CPF, cidade/estado, forma de pagamento, ativo ou inativo. Convite por e-mail. Dashboards. Exportação em Excel. E-mail de digest quando a folha ainda está pendente. Motor de regras para extra em dia útil / sábado / domingo-feriado, terceiro sábado opcional, e feriados nacionais, estaduais e municipais.",
+          "Pessoas com cargo, salário, CPF, cidade/estado, forma de pagamento, ativo ou inativo. Convite por e-mail. Dashboards. Exportação em Excel. E-mail de resumo quando a folha ainda está pendente. Motor de regras para extra em dia útil / sábado / domingo-feriado, terceiro sábado opcional, e feriados nacionais, estaduais e municipais.",
         ],
       },
       {
         heading: "O que não é",
         paragraphs: [
-          "Não é folha eSocial/CLT completa — sem INSS, IRRF, benefícios, férias ou 13º. É a camada operacional de horas e adicional (hora extra + noturno), e depois o fechamento do mês.",
+          "Não é folha eSocial/CLT completa — sem INSS, IRRF, benefícios, férias ou 13º. É a operação de horas e adicional (hora extra + noturno), e depois o fechamento do mês.",
         ],
       },
     ],

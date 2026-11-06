@@ -19,28 +19,28 @@ export const siteConfigPt: SiteConfig = {
   brandMark: "Matheus Krisciumas",
   roleTitle: "Engenheiro de software",
   tagline:
-    "Engenheiro de software. Trabalho full-stack em sistemas de negócio. Remoto, a partir do Brasil.",
+    "Engenheiro de software. Construo sistemas full-stack para o dia a dia da operação. Remoto, no Brasil.",
   hero: {
     subtitle:
-      "Trabalho em sistemas full-stack para fluxos de negócio reais. Remoto, a partir do Brasil.",
+      "Construo sistemas full-stack para fluxos reais de operação. Trabalho remoto, no Brasil.",
     primaryCta: { label: "Ver todos os projetos", href: "/projects" },
-    secondaryCta: { label: "Dizer olá", href: "#contact" },
+    secondaryCta: { label: "Falar comigo", href: "#contact" },
   },
   work: {
-    title: "Trabalho",
+    title: "Projetos",
     subtitle:
-      "Faturamento, mapas, movimentação de dinheiro, saúde, fundo fixo e folha de ponto. Os resultados ficam em cada caso.",
+      "Faturamento, mapas, pagamentos, saúde, fundo fixo e ponto. Cada caso conta o que mudou.",
   },
   impact: {
     index: "// 02. Resultados mensuráveis",
-    title: "Impacto de sistema e métricas de produção",
+    title: "Impacto em produção, com números",
     subtitle:
-      "Números de sistemas que já estavam em uso, não de um laboratório de benchmark.",
+      "Números de sistemas que as pessoas já usavam — não de um teste de laboratório.",
     principles: [
-      "Domínios de falha claros",
-      "Decisões ligadas ao negócio",
-      "Contratos com tipagem segura",
-      "Estabilidade no pico",
+      "Falhas isoladas e fáceis de achar",
+      "Técnica a serviço do negócio",
+      "Contratos tipados",
+      "Estável no horário de pico",
     ],
   },
   metrics: [
@@ -55,39 +55,38 @@ export const siteConfigPt: SiteConfig = {
     {
       label: "Volume mensal",
       value: "R$ 1,5 mi+",
-      title: "Vazão do faturamento médico",
-      body: "Único responsável full-stack de um sistema de faturamento que processa cerca de R$ 1,5 milhão por mês em 74 hospitais.",
+      title: "Faturamento médico processado",
+      body: "Único desenvolvedor full-stack de um sistema de faturamento que processa cerca de R$ 1,5 milhão por mês em 74 hospitais.",
       meta: "Escopo",
       metaValue: "74 hospitais",
     },
     {
-      label: "Escala do domínio",
+      label: "Escala do produto",
       value: "25 mil",
       title: "Parâmetros de pagamento modelados",
-      body: "Modelo SQL e superfície de produto para 25 mil parâmetros de pagamento e 4 mil procedimentos, com integrações de boleto, e-mail e WhatsApp.",
+      body: "Modelo SQL e telas do produto para 25 mil parâmetros de pagamento e 4 mil procedimentos, com boleto, e-mail e WhatsApp.",
       meta: "Procedimentos",
       metaValue: "4.000",
     },
   ] satisfies Metric[],
   experience: {
     title: "Experiência",
-    subtitle:
-      "Saúde, mapas e movimentação de dinheiro. Remoto, a partir do Brasil.",
+    subtitle: "Saúde, mapas e pagamentos. Remoto, no Brasil.",
   },
   about: {
     title: "Sobre",
     quote:
-      "Gosto de entender o problema primeiro e depois construir sistemas que continuem simples de raciocinar conforme crescem.",
+      "Prefiro entender o problema primeiro e só então construir sistemas que continuem fáceis de acompanhar conforme crescem.",
     paragraphs: [
-      "Sou engenheiro de software e trabalho com fluxos de negócio e e-commerce. Me importo com comunicação clara, entrega confiável em equipe e decisões técnicas ligadas a valor real — não só código pelo código.",
-      "Fora do trabalho, toco violão, mantenho a rotina de treino e passo tempo com amigos. Esse equilíbrio me deixa mais presente e focado.",
+      "Sou engenheiro de software e trabalho com fluxos de operação e e-commerce. Me importo com comunicação clara, entrega confiável em equipe e decisão técnica ligada a valor de verdade — não código pelo código.",
+      "Fora do trabalho, toco violão, mantenho a rotina de treino e passo tempo com amigos. Esse equilíbrio me ajuda a manter o foco.",
     ],
     signatureRole: "Desenvolvedor full-stack",
     skills: [
       "Node.js / APIs",
       "TypeScript",
       "Produto full-stack",
-      "Design de sistemas",
+      "Arquitetura de sistemas",
       "Fluxos de e-commerce",
     ],
     competencies: [
@@ -98,15 +97,15 @@ export const siteConfigPt: SiteConfig = {
       },
       {
         icon: "account_tree",
-        title: "Sistemas de produto",
+        title: "Produto de ponta a ponta",
         tools:
-          "Next.js, React Native, TypeScript, Firebase em tempo real, integrações de pagamento e mensagem.",
+          "Next.js, React Native, TypeScript, Firebase em tempo real, pagamentos e mensagens.",
       },
       {
         icon: "map",
-        title: "Trabalho de domínio",
+        title: "Domínios em que atuei",
         tools:
-          "Faturamento médico, mapas geoespaciais, conversão de UTM para WGS84, movimentação de dinheiro assíncrona.",
+          "Faturamento médico, mapas geoespaciais, conversão UTM para WGS84, pagamentos assíncronos.",
       },
     ] satisfies Competency[],
     portraitUrl: "/profile-pic.jpeg",
@@ -115,7 +114,7 @@ export const siteConfigPt: SiteConfig = {
   contact: {
     title: "Olá.",
     subtitle:
-      "O caminho mais rápido é o LinkedIn. Prefere e-mail? Manda uma mensagem abaixo ou escreve direto.",
+      "O jeito mais rápido de me achar é o LinkedIn. Se preferir e-mail, manda uma mensagem abaixo ou escreve direto.",
     avatarUrl: "/profile-pic.jpeg",
     avatarAlt: "Matheus Krisciumas",
     email: links.emailAddress,
@@ -123,7 +122,7 @@ export const siteConfigPt: SiteConfig = {
     languages: "Inglês e português",
   },
   nav: [
-    { label: "Trabalho", href: "#projects" },
+    { label: "Projetos", href: "#projects" },
     { label: "Experiência", href: "#experience" },
     { label: "Sobre", href: "#about" },
     { label: "Contato", href: "#contact" },
@@ -137,28 +136,28 @@ export const siteConfigPt: SiteConfig = {
     precision: "Matheus Krisciumas",
     stack: "TypeScript · NestJS · Next.js · React Native · Java · SQL",
     availability: "UTC-3 · Remoto",
-    copyright: "© 2026 Matheus Krisciumas. Remoto, a partir do Brasil.",
+    copyright: "© 2026 Matheus Krisciumas. Remoto, no Brasil.",
     links: [
       { label: "GitHub", href: links.github },
       { label: "LinkedIn", href: links.linkedin },
       { label: "E-mail", href: links.email },
       { label: "Todos os projetos", href: "/projects" },
-      { label: "Blog", href: "/blog" },
+      { label: "Textos", href: "/blog" },
     ] satisfies FooterLink[],
   },
   chrome: {
     systems: "",
     available: "Disponível",
-    getInTouch: "Dizer olá",
+    getInTouch: "Falar comigo",
     menu: "Menu",
     close: "Fechar",
     projectsIndex: "Todos os projetos",
     seeAllProjects: "Ver todos os projetos",
-    blog: "Notas",
+    blog: "Textos",
     language: "Idioma",
-    competenciesHeading: "Com o que eu trabalho",
-    openToConversations: "Aberto a conversas",
-    portraitRole: "Full-stack e sistemas de negócio",
+    competenciesHeading: "O que uso no dia a dia",
+    openToConversations: "Disponível para conversar",
+    portraitRole: "Full-stack em sistemas de operação",
     remote: "Remoto",
     primaryCommunication: "Contato principal",
     copyAddress: "Copiar e-mail",
@@ -171,39 +170,39 @@ export const siteConfigPt: SiteConfig = {
     sending: "Enviando...",
     sendMessage: "Enviar mensagem",
     engineeringChallenge: "O problema",
-    impactOutcome: "O que saiu",
+    impactOutcome: "O que entreguei",
     theIdea: "A ideia",
-    backToProjects: "Todo o trabalho",
-    allNotes: "Todas as notas",
+    backToProjects: "Todos os projetos",
+    allNotes: "Todos os textos",
   },
-    pages: {
+  pages: {
     projects: {
-      title: "Trabalho",
+      title: "Projetos",
       subtitle:
-        "Sistemas em tempo integral, contratos paralelos e trabalho pessoal. Filtre por tipo ou stack.",
-      kindLabel: "Tipo de trabalho",
+        "Emprego, contratos e iniciativas pessoais. Filtre por tipo ou stack.",
+      kindLabel: "Tipo de projeto",
       tagsLabel: "Stack",
       kinds: {
         all: "Todos",
-        "full-time": "Tempo integral",
+        "full-time": "Emprego",
         contract: "Contrato",
         personal: "Pessoal",
       },
-      shown: "{count} visíveis",
-      empty:
-        "Nada neste recorte. Limpe um filtro para ver mais trabalho.",
+      shown: "{count} projetos",
+      empty: "Nenhum projeto com esse filtro. Tire um filtro para ver mais.",
     },
     blog: {
-      title: "Notas",
-      subtitle: "Escrita ocasional sobre sistemas e as decisões por trás deles.",
+      title: "Textos",
+      subtitle: "Escrita de vez em quando sobre sistemas e as decisões por trás deles.",
       emptyTitle: "Nada publicado ainda",
-      emptyBody: "Quando uma nota estiver pronta, ela mora aqui. O trabalho está na home.",
-      back: "Voltar ao trabalho",
+      emptyBody:
+        "Quando houver um texto, ele aparece aqui. Os projetos estão na página inicial.",
+      back: "Voltar aos projetos",
     },
     notFound: {
       title: "Essa página não está aqui.",
       body: "Pode ter mudado de lugar, ou nunca foi publicada.",
-      cta: "Ir para a home",
+      cta: "Ir para o início",
     },
   },
 };

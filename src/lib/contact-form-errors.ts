@@ -36,10 +36,10 @@ const contactFormCopyPt = {
     server_error: "Algo deu errado por aqui. Tente de novo mais tarde.",
   },
   network:
-    "Não foi possível falar com o servidor. Confira a conexão e tente de novo.",
+    "Não deu para conectar ao servidor. Confira a conexão e tente de novo.",
   success: {
     title: "Mensagem enviada",
-    description: "Valeu pelo contato. Respondo em breve.",
+    description: "Obrigado pelo contato. Respondo em breve.",
   },
 } as const;
 
