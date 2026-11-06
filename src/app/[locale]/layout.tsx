@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { DocumentLang } from "@/components/layout/DocumentLang";
+import { ViewTransitionReady } from "@/components/motion/ViewTransitionReady";
 import { isLocale, locales, type Locale } from "@/lib/i18n/locales";
 import { alternatePaths } from "@/lib/i18n/paths";
 import { getSiteConfig } from "@/lib/content/site";
@@ -61,6 +62,7 @@ export default async function LocaleLayout({
   return (
     <>
       <DocumentLang locale={locale} />
+      <ViewTransitionReady />
       <Header locale={locale} />
       {children}
       <Footer locale={locale} />

@@ -104,7 +104,10 @@ export function Header({ locale }: { locale: Locale }) {
   const onProjects = pathname === projectsHref;
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-outline-variant/25 bg-canvas/80 backdrop-blur-xl">
+    <header
+      className="site-header fixed top-0 z-50 w-full border-b border-outline-variant/25 bg-canvas/80 backdrop-blur-xl"
+      style={{ viewTransitionName: "site-header" }}
+    >
       <div className="page-shell flex h-16 items-center justify-between gap-4">
         <Link
           href={localizeHref(current, "/")}

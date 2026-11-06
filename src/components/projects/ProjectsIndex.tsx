@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
+import { TransitionLink } from "@/components/motion/TransitionLink";
 import type { Project, ProjectKindFilter } from "@/lib/content/projects";
 import { filterProjects, tagsForKind } from "@/lib/content/projects";
 import { getSiteConfig } from "@/lib/content/site";
@@ -121,46 +121,57 @@ export function ProjectsIndex({
           {copy.empty}
         </p>
       ) : (
-        <ul className="mt-6 divide-y divide-outline-variant/40 border-y border-outline-variant/40">
+        <ul className="mt-6 flex flex-col gap-2">
           {visible.map((project) => {
             const proof = project.stats[0];
+            const titleId = `project-title-${project.slug}`;
             return (
               <li key={project.slug} id={project.slug}>
-                <article className="grid gap-4 py-8 lg:grid-cols-12 lg:gap-10">
-                  <div className="lg:col-span-8">
-                    <h2 className="text-headline-md text-on-surface">
-                      <Link
-                        href={localizeHref(locale, `/projects/${project.slug}`)}
-                        className="underline decoration-transparent underline-offset-4 hover:text-primary hover:decoration-primary/30"
+                <TransitionLink
+                  href={localizeHref(locale, `/projects/${project.slug}`)}
+                  aria-labelledby={titleId}
+                  className="project-row group block cursor-pointer rounded-2xl px-4 py-7 lg:px-5"
+                >
+                  <article className="grid gap-4 lg:grid-cols-12 lg:gap-10">
+                    <div className="lg:col-span-8">
+                      <h2
+                        id={titleId}
+                        className="project-title-shared text-headline-md text-on-surface transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-primary"
+                        style={{
+                          viewTransitionName: `project-title-${project.slug}`,
+                        }}
                       >
                         {project.title}
-                      </Link>
-                    </h2>
-                    <p className="text-label-sm mt-2 text-outline">
-                      {project.kicker}
-                      {" · "}
-                      {copy.kinds[project.kind]}
-                      {" · "}
-                      {project.period}
-                    </p>
-                    <p className="text-body-md mt-3 max-w-prose text-on-surface-variant">
-                      {project.description}
-                    </p>
-                    {proof ? (
-                      <p className="text-code-sm mt-4 text-on-surface">
-                        {proof.value}
-                        <span className="text-outline"> {proof.label}</span>
+                      </h2>
+                      <p className="text-label-sm mt-2 text-outline">
+                        {project.kicker}
+                        {" · "}
+                        {copy.kinds[project.kind]}
+                        {" · "}
+                        {project.period}
                       </p>
-                    ) : null}
-                  </div>
-                  <div className="flex flex-wrap content-start gap-x-3 gap-y-1 lg:col-span-4 lg:justify-end lg:pt-1">
-                    {project.stack.map((tag) => (
-                      <span key={tag} className="text-label-sm text-outline">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </article>
+                      <p className="text-body-md mt-3 max-w-prose text-on-surface-variant">
+                        {project.description}
+                      </p>
+                      {proof ? (
+                        <p className="text-code-sm mt-4 text-on-surface">
+                          {proof.value}
+                          <span className="text-outline"> {proof.label}</span>
+                        </p>
+                      ) : null}
+                    </div>
+                    <div className="flex flex-wrap content-start gap-x-3 gap-y-1 lg:col-span-4 lg:justify-end lg:pt-1">
+                      {project.stack.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-label-sm text-outline transition-colors duration-300 group-hover:text-on-surface-variant"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                </TransitionLink>
               </li>
             );
           })}
