@@ -326,17 +326,18 @@ body {
   inset: 0;
   background: linear-gradient(
     105deg,
-    transparent 40%,
-    rgba(232, 236, 239, 0.06) 50%,
-    transparent 60%
+    transparent 28%,
+    rgba(232, 236, 239, 0.035) 50%,
+    transparent 72%
   );
   transform: translateX(-120%);
   pointer-events: none;
+  transition: transform 0s linear;
 }
 
 .sheen:hover::after {
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   transform: translateX(120%);
+  transition: transform 2.4s cubic-bezier(0.37, 0, 0.63, 1);
 }
 
 @keyframes name-in {
